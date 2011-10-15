@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'MacUnwand' target in the 'MacUnwand' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
