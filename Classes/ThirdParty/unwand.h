@@ -1,5 +1,5 @@
 //
-//  MacUnwandAppDelegate.m
+//  unwand.h
 //  MacUnwand
 //
 //  Created by Moiz Merchant on 10/15/11.
@@ -7,28 +7,24 @@
 //
 
 //-----------------------------------------------------------------------------
-// imports
+// includes
 //-----------------------------------------------------------------------------
 
-#import "MacUnwandAppDelegate.h"
+#import <Cocoa/Cocoa.h>
 
 //-----------------------------------------------------------------------------
-// interface implementation
+// interface definition
 //-----------------------------------------------------------------------------
 
-@implementation MacUnwandAppDelegate
-
-//-----------------------------------------------------------------------------
-
-@synthesize window = mWindow;
-
-//-----------------------------------------------------------------------------
-
-- (void) applicationDidFinishLaunching:(NSNotification*)notification 
+@interface Unwand : NSObject
 {
-	// insert code here to initialize your application 
 }
 
 //-----------------------------------------------------------------------------
 
++ (NSArray*) decryptWand:(NSString*)filepath;
+
+//-----------------------------------------------------------------------------
+
 @end
+

@@ -1,29 +1,29 @@
 //
-//  MacUnwandAppDelegate.h
+//  WandDataController.h
 //  MacUnwand
 //
-//  Created by Moiz Merchant on 10/15/11.
+//  Created by Moiz Merchant on 10/16/11.
 //  Copyright 2011 Bunnies on Acid. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------
-// imports
+// includes
 //-----------------------------------------------------------------------------
 
 #import <Cocoa/Cocoa.h>
 
 //-----------------------------------------------------------------------------
-// imports
+// interface definition
 //-----------------------------------------------------------------------------
 
-@interface MacUnwandAppDelegate : NSObject <NSApplicationDelegate> 
+@interface WandDataController : NSObject 
 {
-    NSWindow *mWindow;
+    NSArray  *mWandData;
 }
 
 //-----------------------------------------------------------------------------
 
-@property (assign) IBOutlet NSWindow *window;
+@property (retain) NSArray *wandData;
 
 //-----------------------------------------------------------------------------
 
