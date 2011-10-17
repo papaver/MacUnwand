@@ -11,6 +11,7 @@
 //-----------------------------------------------------------------------------
 
 #import <Cocoa/Cocoa.h>
+#import <WindowDragDestination.h>
 
 //-----------------------------------------------------------------------------
 // forward declarations
@@ -21,8 +22,8 @@
 //-----------------------------------------------------------------------------
 // interface definition
 //-----------------------------------------------------------------------------
-
-@interface MacUnwandAppDelegate : NSObject <NSApplicationDelegate> 
+                                                                  
+@interface MacUnwandAppDelegate : NSObject <NSApplicationDelegate, WindowDragDestinationDelegate> 
 {
     NSWindow           *mWindow;
     WandDataController *mWandDataController;

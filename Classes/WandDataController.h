@@ -19,11 +19,13 @@
 @interface WandDataController : NSObject 
 {
     NSArray  *mWandData;
+    NSString *mWandFile;
 }
 
 //-----------------------------------------------------------------------------
 
-@property (retain) NSArray *wandData;
+@property (nonatomic, retain) NSArray  *wandData;
+@property (nonatomic, retain) NSString *wandFile;
 
 //-----------------------------------------------------------------------------
 

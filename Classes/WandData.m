@@ -38,10 +38,6 @@
     // decrypt all wand file
     NSArray* strings = [Unwand decryptWand:filepath];
 
-    for (NSUInteger index = kStartIndex; index < strings.count; ++index) {
-        NSLog(@"%@", [strings objectAtIndex:index]);
-    }
-
     // setup date formater
     [NSDateFormatter setDefaultFormatterBehavior:NSDateFormatterBehavior10_4];
     NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
@@ -58,14 +54,12 @@
             ++index;
             continue;
         }
-        NSLog(@"%@ -> %@", dateString, date);
 
         // calculate proper indexes
         NSString *entry      = [strings objectAtIndex:index + 2];
         NSUInteger urlIndex  = index + 1;
         NSUInteger userIndex = index + ([entry hasPrefix:@"http"] ? 4 : 5);
         NSUInteger passIndex = index + ([entry hasPrefix:@"http"] ? 6 : 7);
-        NSLog(@"prefix: %@, %d %d", entry, userIndex, passIndex);
 
         // save data
         WandData *data = [[[WandData alloc] init] autorelease];

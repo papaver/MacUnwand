@@ -22,6 +22,7 @@
 //-----------------------------------------------------------------------------
 
 @synthesize wandData = mWandData;
+@synthesize wandFile = mWandFile;
 
 //-----------------------------------------------------------------------------
 
@@ -29,9 +30,26 @@
 {
     self = [super init];
     if (self) {
-        self.wandData = [WandData decryptWand:@"/Users/papaver/Library/Opera/wand.dat"];
+        self.wandData = $array(nil);
     }
     return self;
+}
+
+//-----------------------------------------------------------------------------
+
+- (void) setWandFile:(NSString*)wandFile
+{
+    // release existing data
+    if (mWandFile != nil) {
+        [mWandFile release];
+    }
+
+    // save data
+    mWandFile = wandFile;
+    [mWandFile retain];
+
+    // update wand data
+    self.wandData = [WandData decryptWand:mWandFile];
 }
 
 //-----------------------------------------------------------------------------
@@ -40,6 +58,7 @@
 {
     [super dealloc];
     [mWandData release];
+    [mWandFile release];
 }
 
 //-----------------------------------------------------------------------------
