@@ -21,8 +21,9 @@
 
 //-----------------------------------------------------------------------------
 
-@synthesize wandData = mWandData;
-@synthesize wandFile = mWandFile;
+@synthesize wandData     = mWandData;
+@synthesize searchFilter = mSearchFilter;
+@synthesize wandFile     = mWandFile;
 
 //-----------------------------------------------------------------------------
 
@@ -30,7 +31,8 @@
 {
     self = [super init];
     if (self) {
-        self.wandData = $array(nil);
+        self.wandData     = $array(nil);
+        self.searchFilter = [NSPredicate predicateWithFormat:nil];
     }
     return self;
 }

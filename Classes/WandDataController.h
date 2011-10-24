@@ -18,15 +18,18 @@
 
 @interface WandDataController : NSObject 
 {
-    NSArray  *mWandData;
-    NSString *mWandFile;
+    NSMutableArray *mWandData;
+    NSPredicate    *mSearchFilter;
+    NSString       *mWandFile;
 }
 
 //-----------------------------------------------------------------------------
 
-@property (nonatomic, retain) NSArray  *wandData;
-@property (nonatomic, retain) NSString *wandFile;
+@property (nonatomic, retain) NSMutableArray *wandData;
+@property (nonatomic, retain) NSPredicate    *searchFilter;
+@property (nonatomic, retain) NSString       *wandFile;
 
 //-----------------------------------------------------------------------------
+
 
 @end

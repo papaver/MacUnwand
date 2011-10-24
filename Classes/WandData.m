@@ -29,11 +29,11 @@
 
 @synthesize url  = mUrl;
 @synthesize user = mUser;
-@synthesize pass = mPass;
+@synthesize pass = mPassword;
 
 //-----------------------------------------------------------------------------
 
-+ (NSArray*) decryptWand:(NSString*)filepath
++ (NSMutableArray*) decryptWand:(NSString*)filepath
 {
     // decrypt all wand file
     NSArray* strings = [Unwand decryptWand:filepath];
