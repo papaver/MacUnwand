@@ -21,6 +21,17 @@
 //-----------------------------------------------------------------------------
 
 #define kDefaultWandFile @"~/Library/Opera/wand.dat"
+#define kShowPanel       @"ShowConfigPanel"
+#define kAutoLoad        @"AutoLoadDefaultWandFile"
+
+//-----------------------------------------------------------------------------
+// interface definition
+//-----------------------------------------------------------------------------
+
+@interface MacUnwandAppDelegate ()
+    - (void) updateConfiguration;
+    - (void) loadDefaultWandFile;
+@end
 
 //-----------------------------------------------------------------------------
 // interface implementation
@@ -31,6 +42,7 @@
 //-----------------------------------------------------------------------------
 
 @synthesize window             = mWindow;
+@synthesize configPanel        = mConfigPanel;
 @synthesize wandDataController = mWandDataController;
 
 //-----------------------------------------------------------------------------
@@ -40,56 +52,29 @@
 
 - (void) applicationDidFinishLaunching:(NSNotification*)notification 
 {
-/*
-    NSError *error;
-    SFAuthorization *authorization = [SFAuthorization authorization];
-    BOOL result                    = [authorization obtainWithRights:NULL
-                                                               flags:kAuthorizationFlagExtendRights
-                                                         environment:NULL
-                                                    authorizedRights:NULL
-                                                               error:&error];
-
-    if (!result) {
-        NSLog(@"SFAuthorization error: %@", [error localizedDescription]); 
-        return;
-    }
-
-// Create authorization reference
-OSStatus status;
-AuthorizationRef authorizationRef;
-
-// AuthorizationCreate and pass NULL as the initial
-// AuthorizationRights set so that the AuthorizationRef gets created
-// successfully, and then later call AuthorizationCopyRights to
-// determine or extend the allowable rights.
-// http://developer.apple.com/qa/qa2001/qa1172.html
-status = AuthorizationCreate(NULL, kAuthorizationEmptyEnvironment,
-                             kAuthorizationFlagDefaults, &authorizationRef);
-if (status != errAuthorizationSuccess)
-    NSLog(@"Error Creating Initial Authorization: %d", status);
-
-// kAuthorizationRightExecute == "system.privilege.admin"
-AuthorizationItem right = {kAuthorizationRightExecute, 0, NULL, 0};
-AuthorizationRights rights = {1, &right};
-AuthorizationFlags flags = kAuthorizationFlagDefaults |
-                           kAuthorizationFlagInteractionAllowed |
-                           kAuthorizationFlagPreAuthorize |
-                           kAuthorizationFlagExtendRights;
-
-// Call AuthorizationCopyRights to determine or extend the allowable rights.
-status = AuthorizationCopyRights(authorizationRef, &rights, NULL, flags, NULL);
-if (status != errAuthorizationSuccess)
-    NSLog(@"Copy Rights Unsuccessful: %d", status);
-*/
-
-
     // register the valid drag types
     NSArray *dragTypes = $array(NSFilenamesPboardType, nil);
     [self.window registerForDraggedTypes:dragTypes];
 
-    // set the default wand file
-    NSString *defaultPath = $string(kDefaultWandFile);
-    self.wandDataController.wandFile = [defaultPath stringByExpandingTildeInPath];
+    // load user preferences
+    NSUserDefaults *preferences      = [NSUserDefaults standardUserDefaults];
+    NSString *defaultPreferencesPath = [[NSBundle mainBundle] 
+        pathForResource:@"Settings" ofType:@"plist"];
+    NSDictionary *dictionary         = [NSDictionary 
+        dictionaryWithContentsOfFile:defaultPreferencesPath];
+    [preferences registerDefaults:dictionary];
+
+    // read preferences
+    BOOL showPanel = [preferences boolForKey:kShowPanel];
+    BOOL autoLoad  = [preferences boolForKey:kAutoLoad];
+
+    // show the model configuration window if required
+    if (showPanel) {
+        [[NSApplication sharedApplication] runModalForWindow:self.configPanel];
+    } else if (autoLoad) {
+        NSString *defaultPath = $string(kDefaultWandFile);
+        self.wandDataController.wandFile = [defaultPath stringByExpandingTildeInPath];
+    }
 }
 
 //-----------------------------------------------------------------------------
@@ -97,6 +82,28 @@ if (status != errAuthorizationSuccess)
 - (BOOL) applicationShouldTerminateAfterLastWindowClosed:(NSApplication*)application
 {
     return YES;
+}
+
+//-----------------------------------------------------------------------------
+#pragma mark -
+#pragma mark Helper Functions
+//-----------------------------------------------------------------------------
+
+- (void) updateConfiguration
+{
+    // sync the preferences with checkbox status
+    NSButton *doNotShowCheckbox = [self.configPanel.contentView viewWithTag:1];
+    BOOL showPanel              = doNotShowCheckbox.state == NSOffState;
+    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+    [preferences setBool:showPanel forKey:kShowPanel];
+}
+
+//-----------------------------------------------------------------------------
+
+- (void) loadDefaultWandFile
+{
+    NSString *defaultPath            = $string(kDefaultWandFile);
+    self.wandDataController.wandFile = [defaultPath stringByExpandingTildeInPath];
 }
 
 //-----------------------------------------------------------------------------
@@ -208,6 +215,49 @@ if (status != errAuthorizationSuccess)
 {
     NSString *urlPath = @"http://www.bunniesonacid.com/?page_id=18";
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:urlPath]];
+}
+
+//-----------------------------------------------------------------------------
+#pragma mark -
+#pragma mark Config Pane Action
+//-----------------------------------------------------------------------------
+
+- (IBAction) configAlways:(id)sender
+{
+    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+    [preferences setBool:NO forKey:kShowPanel];
+    [preferences setBool:YES forKey:kAutoLoad];
+
+    // load wand file
+    [self loadDefaultWandFile];
+
+    // close panel
+    [self.configPanel close];
+    [[NSApplication sharedApplication] stopModal];
+    
+    // save preferences
+    [preferences synchronize];
+}
+
+//-----------------------------------------------------------------------------
+
+- (IBAction) configYes:(id)sender
+{
+    [self loadDefaultWandFile];
+    [self updateConfiguration];
+    [self.configPanel close];
+    [[NSApplication sharedApplication] stopModal];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+//-----------------------------------------------------------------------------
+
+- (IBAction) configNo:(id)sender
+{
+    [self updateConfiguration];
+    [self.configPanel close];
+    [[NSApplication sharedApplication] stopModal];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 //-----------------------------------------------------------------------------

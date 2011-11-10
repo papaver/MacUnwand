@@ -12,4 +12,5 @@
 
 #define $string(...) [NSString stringWithFormat:__VA_ARGS__]
 #define $array(...)  [NSArray arrayWithObjects:__VA_ARGS__]
+#define $dict(k, v)  [NSDictionary dictionaryWithObjects:v forKeys:k]
 

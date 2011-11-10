@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
 		256AC3DA0F4B6AC300CF3369 /* MacUnwandAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* MacUnwandAppDelegate.m */; };
+		2E2FCFEB146B6556001A5D98 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2E2FCFEA146B6556001A5D98 /* Settings.plist */; };
+		2E2FCFEE146B6680001A5D98 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2FCFED146B6680001A5D98 /* Settings.m */; };
 		2E9EF3E9144E29D600A18B43 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E9EF3E8144E29D600A18B43 /* Security.framework */; };
 		2EE2236F144A54F60025C9C7 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EE2236E144A54F60025C9C7 /* libcrypto.dylib */; };
 		2EE22380144A56F40025C9C7 /* unwand.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EE2237F144A56F40025C9C7 /* unwand.mm */; };
@@ -33,6 +35,9 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		2E2FCFEA146B6556001A5D98 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
+		2E2FCFEC146B6680001A5D98 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
+		2E2FCFED146B6680001A5D98 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
 		2E9EF3E8144E29D600A18B43 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		2EE2236E144A54F60025C9C7 /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = usr/lib/libcrypto.dylib; sourceTree = SDKROOT; };
 		2EE2237F144A56F40025C9C7 /* unwand.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = unwand.mm; sourceTree = "<group>"; };
@@ -70,6 +75,8 @@
 			children = (
 				2EE22371144A55000025C9C7 /* ThirdParty */,
 				2EE22567144CAF480025C9C7 /* Macros.h */,
+				2E2FCFEC146B6680001A5D98 /* Settings.h */,
+				2E2FCFED146B6680001A5D98 /* Settings.m */,
 				2EE2248C144AB3E60025C9C7 /* WandData.h */,
 				2EE2248D144AB3E60025C9C7 /* WandData.m */,
 				256AC3D80F4B6AC300CF3369 /* MacUnwandAppDelegate.h */,
@@ -139,6 +146,7 @@
 				8D1107310486CEB800E47090 /* MacUnwand-Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
+				2E2FCFEA146B6556001A5D98 /* Settings.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -222,6 +230,7 @@
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
 				2EE22755144D1E880025C9C7 /* Icon.icns in Resources */,
+				2E2FCFEB146B6556001A5D98 /* Settings.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,6 +247,7 @@
 				2EE2248E144AB3E60025C9C7 /* WandData.m in Sources */,
 				2EE2250B144ACF3A0025C9C7 /* WandDataController.m in Sources */,
 				2EE22584144CB4CE0025C9C7 /* WindowDragDestination.m in Sources */,
+				2E2FCFEE146B6680001A5D98 /* Settings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
